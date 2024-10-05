@@ -21,10 +21,10 @@ const Sign = () => {
             if(isSignedIn){
                 Cookies.remove("LEETCODE_SESSION");
                 Cookies.remove("CSRF_TOKEN");
-                setIsSignedIn(false);
+                location.href="/";
                 return;
             }
-            
+
             const res = await axios.get("http://localhost:3002/api/verify/link");
             const data = res.data;
             

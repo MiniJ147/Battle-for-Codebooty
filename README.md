@@ -7,8 +7,8 @@
 //matches 
 
 POST /api/match/create
-Body: {
-    "username": "string" //host username
+Header: {
+    session:leetcode_session,
 }
 
 Response: {
@@ -16,15 +16,22 @@ Response: {
 }
 
 
+/*
+this talks in reference to the user
+are they activily in this session
+*/
 GET /api/match/{code}/exists
 Response: {
     "exists": "boolean"
 }
+Header: {
+    session:leetcode_session,
+}
 
 
 POST /api/match/{code}/join
-Body: {
-    "username": "string"
+Headers: {
+    session:leetcode_session,
 }
 
 Response: {

@@ -1,17 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 
 import WoodBg from '../../assets/woodpattern.png'
 
 
 function Header(){
     const [inputValue, setInputValue] = useState('');
+    const [isSignedIn, setIsSignedIn] = useState(false);
+
+    useEffect(()=>{
+        setIsSignedIn(Cookies.get("LEETCODE_SESSION") && Cookies.get("CSRF_TOKEN"));
+    },[Cookies.get("LEETCODE_SESSION",Cookies.get("CSRF_TOKEN"))])
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if(!isSignedIn){
+            alert("please sign in before continuing");
+            return;
+        }
+
         console.log('Submitted value:', inputValue);
     };
     const handleCreateLobby = (e) => {
         e.preventDefault();
+        if(!isSignedIn){
+            alert("please sign in before continuing");
+            return;
+        }
+
         console.log('Create Lobby');
     };
 
