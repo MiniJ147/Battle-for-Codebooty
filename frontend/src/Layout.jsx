@@ -12,12 +12,15 @@ export const Layout = () => {
             <Link to="/match">Match</Link>
           </li>
           <li>
+            <Link to="/score">Score</Link>
+          </li>
+          <li>
             <Link to="/contact">wut</Link>
           </li>
         </ul>
       </nav>
 
-      <Outlet />
+      <Outlet/>
     </>
   )
 }
