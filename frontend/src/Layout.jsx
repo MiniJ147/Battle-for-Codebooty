@@ -4,20 +4,10 @@ export const Layout = () => {
   return (
     <>
       <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/match">Match</Link>
-          </li>
-          <li>
-            <Link to="/score">Score</Link>
-          </li>
-          <li>
-            <Link to="/contact">wut</Link>
-          </li>
-        </ul>
+        <Link to="/" ml={4}>Home</Link>
+        <Link to="/match" ml={4}>Match</Link>
+        <Link to="/score" ml={4}>Score</Link>
+        <Link to="/contact" ml={4}>wut</Link>
       </nav>
 
       <Outlet/>
