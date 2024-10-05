@@ -9,9 +9,10 @@ export class Match {
   public matchCode: string
   public state: MatchState
   public users: Map<string, User>
-  public problem: Problem
   public results: Results
   public hostUsername: string
+
+ 
 
   constructor(matchCode: string, hostUsername) {
     this.matchCode = matchCode;
@@ -20,13 +21,24 @@ export class Match {
 
     this.hostUsername = hostUsername;
 
+    console.log(globals.problemData);
     console.log("creating");
   }
 
+  // problem things
+
   public newProblem(): Problem {
+    
     return undefined
   }
 
+  public getProblem(): Problem {
+    return undefined;
+  }
+
+
+  //user things
+  
   public getUser(username : string): User{
     return this.users[username];
   }
@@ -43,6 +55,36 @@ export class Match {
 
   public hasUser(username: string): boolean {
     return this.users[username]!=undefined;
+  }
+}
+
+class ProblemQuerier {
+  private problem: Problem
+  private currElo : number
+  private eloBuf : number
+  private eloInc: number
+
+  private perviousProblemIds : number[]
+
+  constructor(startElo : number, eloBuf : number, eloInc : number){
+    this.currElo = startElo
+    this.eloBuf = eloBuf;
+    this.eloInc = eloInc;
+
+    this.perviousProblemIds = [];
+  }
+
+
+  public newProblem(): Problem {
+    return undefined;
+  }
+
+  public getCurrentProblem(): Problem{
+    return this.problem;
+  }
+
+  private fetchProblem(): Problem{
+    return undefined;
   }
 }
 
