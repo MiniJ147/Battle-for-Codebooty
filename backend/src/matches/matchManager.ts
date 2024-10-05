@@ -9,6 +9,7 @@ export class MatchManager {
 
   // throws error if match does not exists
   public getMatch(matchCode : string) : Match {
+    console.log(this.matches);
     const result = this.matches[matchCode];
     if (!result){
       throw "match does not exists"
@@ -18,23 +19,18 @@ export class MatchManager {
   }
 
   // returns success state
-  public createMatch(host : User): Match {
+  public createMatch(hostName: string): Match {
+    // this.matches.forEach((match,key)=>{
+    //   if(match.hostUsername==hostName){
+    //     throw "user has already created match"
+    //   }
+    // });
+
     let matchCode = this.generateValidCode();
-    this.matches[matchCode] = new Match(matchCode,host);
+    this.matches[matchCode] = new Match(matchCode,hostName);
 
     return this.matches[matchCode];
   }
-
-  // public async runLifetime(){
-  //   console.log(new Date().getTime()/1000, "running lifetime check",this.matches);
-  //   this.matches.forEach((match,key)=>{
-  //     if(match.shouldKill(5)){
-  //       this.matches.delete(match.matchCode);
-  //     }
-  //   })
-
-  //   setTimeout(this.runLifetime.bind(this),1000)
-  // }
 
   //helper function
   private generateValidCode(): string {

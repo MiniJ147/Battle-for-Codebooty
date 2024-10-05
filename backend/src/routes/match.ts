@@ -6,14 +6,14 @@ import { User } from "../matches/match.js";
 
 router.post("/create",(req,res)=>{
     try{
-        const sessionToken = req.headers["session"] as string;
+        const sessionToken = req.cookies.LEETCODE_SESSION;
         if(!sessionToken){
-            res.status(401).send("invalid");
+            res.status(401).send({status:"invalid token"});
             return;
         }
 
         const values = jwtDecode(sessionToken) as any;
-        const newMatch = globals.matchManger.createMatch(new User(undefined,values.username,true));
+        const newMatch = globals.matchManger.createMatch(values.username);
         
         res.send({matchCode:newMatch.matchCode})
     }catch(e){

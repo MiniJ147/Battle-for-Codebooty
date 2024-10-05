@@ -11,60 +11,38 @@ export class Match {
   public users: Map<string, User>
   public problem: Problem
   public results: Results
+  public hostUsername: string
 
-  private emptyCnt: number;
-  private host: User;
-
-  constructor(matchCode: string, host : User) {
+  constructor(matchCode: string, hostUsername) {
     this.matchCode = matchCode;
     this.users = new Map<string, User>();
     this.state = MatchState.Empty;
 
-    this.users.set(host.username,host);
-    this.host=host;
-    this.emptyCnt=0;
+    this.hostUsername = hostUsername;
 
-    console.log(globals.problemData);
     console.log("creating");
   }
-
-  // public shouldKill(lifetimeCap : number): boolean {
-  //   this.users.forEach((user,key)=>{
-  //     console.log("looping");
-  //     if(user.ws || user.ws.OPEN || user.ws.CONNECTING){
-  //       this.emptyCnt=0;
-  //       console.log("alive",user.ws);
-  //       return false;
-  //     }
-  //   })
-
-  //   console.log(this.emptyCnt);
-  //   this.emptyCnt++;
-  //   return this.emptyCnt >= lifetimeCap;
-  // }
 
   public newProblem(): Problem {
     return undefined
   }
 
-  public getUser(username : string){
+  public getUser(username : string): User{
     return this.users[username];
   }
 
-  public getHost() : User {
-    return this.host;
-  }
-
   public addUser(user: User): User {
-    if (!this.hasUser(user.username)) {
-      this.users.set(user.username, user);
+    console.log("attempting to add user",this.users);
+    if(this.hasUser(user.username)){
+      return this.getUser(user.username);
     }
 
-    return this.users[user.username];
+    this.users[user.username] = user;
+    return user;
   }
 
   public hasUser(username: string): boolean {
-    return this.users.has(username);
+    return this.users[username]!=undefined;
   }
 }
 
