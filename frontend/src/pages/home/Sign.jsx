@@ -5,12 +5,10 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const Sign = () => {
-    const [isHovered, setIsHovered] = useState(false);
+    
     const [isSignedIn, setIsSignedIn] = useState(false);
 
-    const handleHover = () => {
-        setIsHovered(!isHovered);
-    };
+    
 
     useEffect(()=>{
         setIsSignedIn(Cookies.get("LEETCODE_SESSION") && Cookies.get("CSRF_TOKEN"));
@@ -44,16 +42,18 @@ const Sign = () => {
                 <div
                     style={{
                         backgroundImage: `url(${WoodBg})`,
-                        transform: isHovered ? 'rotate(-3deg)' : 'rotate(0deg)',
-                        transition: 'transform 0.3s ease'
                     }}
                     className="w-44 h-20 flex justify-center items-center font-Montserrat border-wood2 border-8 rounded-md shadow-md"
-                    onMouseEnter={handleHover}
-                    onMouseLeave={handleHover}
-                >
-                    <button className="p-2 bg-wood1 rounded-md" onClick={handleClick}>{isSignedIn ? <p>Logout</p> : <p>Sign in</p>}</button>
+                    >
+                    <div className="relative group">
+                        <button className="p-2 bg-wood2 rounded-md hover:bg-wood1" onClick={handleClick}>{isSignedIn ? <p>Logout</p> : <p>Sign in</p>}</button>
+                        <span className="absolute bottom-0 left-0 w-0 h-1 bg-wood4 transition-all group-hover:w-full rounded-lg"></span>
+                    </div>
+                    
                 </div>
             </div>
+            
+            
         </>
     );
 };

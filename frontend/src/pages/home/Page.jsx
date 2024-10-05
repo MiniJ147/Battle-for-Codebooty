@@ -8,6 +8,7 @@ export const Home = () => {
     <>
       <Sign/>
       <div  className="bg-gradient-to-b from-soft-blue-start via-soft-blue-middle to-soft-blue-end min-h-96">
+        
         <Header/>       
         
       </div>

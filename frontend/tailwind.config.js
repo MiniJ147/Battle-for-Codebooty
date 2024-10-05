@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}",],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -12,15 +12,15 @@ export default {
         'wood2': '#564540',
         'wood3': '#5F4B43',
         'wood4': '#675045',
-        'wood1': '#4E403E',
       },
       fontFamily: {
         PirataOne: ["Pirata One", "sans-serif"],
         Montserrat: ["Montserrat", "sans-serif"],
-      }
-      
+      },
+      rotate: {
+        '360': '360deg',
+      },
     },
   },
   plugins: [],
 }
-
