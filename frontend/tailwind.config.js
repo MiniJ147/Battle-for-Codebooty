@@ -8,6 +8,10 @@ export default {
         'soft-blue-middle': '#AACDDD',
         'soft-blue-end': '#BAD5E1', 
         'wave-blue': '#8CBDD6',
+        'water-blue-start': '#8bbcd5',
+        'water-blue-middle': '#74a8cf',
+        'water-blue-end': '#6592c8',
+
         'wood1': '#4E403E',
         'wood2': '#564540',
         'wood3': '#5F4B43',

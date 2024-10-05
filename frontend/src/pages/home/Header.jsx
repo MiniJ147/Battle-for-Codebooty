@@ -35,7 +35,7 @@ function Header(){
     return(
         <>
         
-        <div className='w-full flex justify-center align-baseline p-44 '>
+        <div className='w-full flex justify-center align-baseline p-44 pb-20'>
             <div className='relative justify-center align-baseline flex w-full '>
 
            

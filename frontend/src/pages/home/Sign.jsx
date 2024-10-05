@@ -36,8 +36,8 @@ const Sign = () => {
 
     return (
         <>
-            <div className='absolute z-50 top-36 right-10'>
-                <img src={chain} alt="Chain" className="absolute top- z-10 w-20 h-20 flex justify-center align-baseline bottom-20 left-12" />
+            <div className='absolute z-50 top-16 right-10 transition-transform duration-1000 ease-in-out transform hover:translate-y-10'>
+                <img src={chain} alt="Chain" className="absolute z-50 w-32 h-32 flex justify-center align-baseline left-6 " style={{bottom: '71px'}} />
 
                 <div
                     style={{
