@@ -1,4 +1,4 @@
-import { Home } from './Home.jsx';
+import { Home } from './home/page.jsx';
 import { Match } from './Match.jsx';
 import { Score } from './Score.jsx';
 import { NoPage } from './NoPage.jsx';
