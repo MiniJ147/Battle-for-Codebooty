@@ -2,30 +2,33 @@ import { Match } from "./match.js";
 
 export class MatchManager {
   private matches: Map<string, Match>
+  
   constructor() {
     this.matches = new Map<string, Match>();
   }
 
-  // returns match key
-  public createMatch(): string {
-    return this.generateValidCode()
+  public getMatch(matchCode : string) : Match {
+    return this.matches.get(matchCode);
   }
 
-  private isCodeValid(code: string): boolean {
-    this.matches.forEach((val, key) => {
-      if (val.code == code) {
-        return false
-      }
-    });
+  // returns success state
+  public createMatch(): boolean {
+    try{
+      let matchCode = this.generateValidCode();
+      this.matches[matchCode] = new Match(matchCode);
+    }catch(e){
+      return false;
+    }
 
     return true;
   }
 
+  //helper function
   private generateValidCode(): string {
     const cap = 10;
     for (let i = 0; i < cap; i++) {
       let code = Math.random().toString(36).substring(2, 7);
-      if (this.isCodeValid(code)){
+      if (!this.matches.has(code)){
         return code;
       }
     }
