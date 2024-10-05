@@ -1,8 +1,12 @@
 import express from 'express';
 import http from "http"
 import { WebSocket, WebSocketServer } from "ws";
+import globals from './global.js';
+import cors from 'cors';
 
 const app = express();
+app.use(cors());
+
 const server = http.createServer(app);
 
 // type Event = {

@@ -1,5 +1,5 @@
 import express from "express";
 const router = express.Router();
-import matchManger from "../global.js";
+import globals from "../global.js";
 
 export default router;

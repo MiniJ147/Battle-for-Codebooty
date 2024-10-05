@@ -1,14 +1,23 @@
 import { WebSocket } from "ws"
+import globals from '../global.js'
+
 
 export class Match {
-  public code: string
+  public matchCode: string
   public users: Map<string, User>
   public problem: Problem
   public results: Results 
 
-  constructor(code: string) {
-    this.code = code;
+  constructor(matchCode: string) {
+    this.matchCode = matchCode;
     this.users = new Map<string, User>();
+    console.log(globals.problemData);
+    console.log("creating");
+  }
+
+  public newProblem() : Problem {
+    
+    return undefined
   }
 
   public addUser(user : User) : boolean {
@@ -33,7 +42,11 @@ export class User {
 }
 
 export type Problem = {
-  id : number,
+  id: number,
+  titleSlug: string,
+  description: string,
+  templates: Map<string,string>,
+  sampleCases: string
 }
 
 export type Results = {

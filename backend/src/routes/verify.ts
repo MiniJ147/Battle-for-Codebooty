@@ -17,13 +17,6 @@ router.get("/", (req: Request, res: Response) => {
         return;
     }
 
-    // const cookies = cookieParam.split(";").reduce((acc, cookie) => {
-    //     const [key, value] = cookie.split("=");
-    //     acc[key.trim()] = value ? value.trim() : "";
-    //     return acc;
-    // }, {} as Record<string, string>);
-
-    "SESSION=val;CSRFTOKEN=val"
     const cookies = cookieParam.split(";");
     if (cookies.length!=2){
         res.status(400).json({error:"cookie needs to have 2 values"});
@@ -34,7 +27,10 @@ router.get("/", (req: Request, res: Response) => {
     const token = cookies[1].split("=");
 
     try{
-        res.send({LEETCODE_SESSION:session[1],CSRF_TOKEN:token[1]})
+        res.cookie('LEETCODE_SESSION',session[1]);
+        res.cookie('CSRF_TOKEN',token[1]);
+
+        res.redirect("http://localhost:5173/");
     }catch(e){
         res.send({error:"token malformed failed to parse val at ="})
     }
