@@ -1,6 +1,6 @@
-import { Home } from './home/page.jsx';
-import { Match } from './Match.jsx';
-import { Score } from './Score.jsx';
-import { NoPage } from './NoPage.jsx';
+import { Home } from './home/Page.jsx';
+import { Match } from './match/Page.jsx';
+import { Score } from './score/Page.jsx';
+import { NotFound } from './nopage/Page.jsx';
 
-export { Home, Match, Score, NoPage };
+export { Home, Match, Score, NotFound };

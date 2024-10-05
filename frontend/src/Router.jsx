@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes as Switch, Route } from 'react-router-dom';
-import { Home, Match, Score, NoPage } from './pages';
+import { Home, Match, Score, NotFound } from './pages';
 import { Layout } from './Layout.jsx'
 
 export const Router = () => {
@@ -10,7 +10,7 @@ export const Router = () => {
           <Route index element={ <Home />} />
           <Route path="match" element={ <Match />} />
           <Route path="score" element={ <Score /> } />
-          <Route path="*" element={ <NoPage />} />
+          <Route path="*" element={ <NotFound />} />
         </Route>
       </Switch>
     </BrowserRouter>
