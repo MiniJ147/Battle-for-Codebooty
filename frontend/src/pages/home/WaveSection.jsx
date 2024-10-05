@@ -18,8 +18,6 @@ const WaveSection = () => {
                     }}
                 />
             </div>
-            
-
            
         </div>
         

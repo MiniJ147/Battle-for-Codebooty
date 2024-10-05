@@ -54,7 +54,7 @@ function Header(){
                         </form>
                         <form onSubmit={handleCreateLobby} className="flex items-center justify-center space-x-2">
                             <button type="submit" 
-                                        className="bg-wood2 text-white px-4 py-2 rounded hover:bg-wood1 focus:outline-none focus:ring-2 focus:ring-wood4 dropshadow-2xl duration-0"
+                                        className="bg-wood2 text-white px-4 py-2 rounded hover:bg-wood1 focus:outline-none focus:ring-2 focus:ring-wood4 dropshadow-2xl duration-300"
                                 >
                                     Create Lobby
                             </button>
