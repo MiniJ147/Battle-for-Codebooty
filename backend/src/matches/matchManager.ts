@@ -1,4 +1,4 @@
-import { Match } from "./match.js";
+import { Match, User } from "./match.js";
 
 export class MatchManager {
   private matches: Map<string, Match>
@@ -7,21 +7,34 @@ export class MatchManager {
     this.matches = new Map<string, Match>();
   }
 
+  // throws error if match does not exists
   public getMatch(matchCode : string) : Match {
-    return this.matches.get(matchCode);
+    const result = this.matches[matchCode];
+    if (!result){
+      throw "match does not exists"
+    }
+    
+    return result;
   }
 
   // returns success state
-  public createMatch(): boolean {
-    try{
-      let matchCode = this.generateValidCode();
-      this.matches[matchCode] = new Match(matchCode);
-    }catch(e){
-      return false;
-    }
+  public createMatch(host : User): Match {
+    let matchCode = this.generateValidCode();
+    this.matches[matchCode] = new Match(matchCode,host);
 
-    return true;
+    return this.matches[matchCode];
   }
+
+  // public async runLifetime(){
+  //   console.log(new Date().getTime()/1000, "running lifetime check",this.matches);
+  //   this.matches.forEach((match,key)=>{
+  //     if(match.shouldKill(5)){
+  //       this.matches.delete(match.matchCode);
+  //     }
+  //   })
+
+  //   setTimeout(this.runLifetime.bind(this),1000)
+  // }
 
   //helper function
   private generateValidCode(): string {

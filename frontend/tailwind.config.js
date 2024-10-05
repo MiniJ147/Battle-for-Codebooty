@@ -15,7 +15,8 @@ export default {
         'wood1': '#4E403E',
       },
       fontFamily: {
-        PirataOne: ["Pirata One", "sans-serif"]
+        PirataOne: ["Pirata One", "sans-serif"],
+        Montserrat: ["Montserrat", "sans-serif"],
       }
       
     },

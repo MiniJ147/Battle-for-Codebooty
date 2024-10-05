@@ -3,12 +3,12 @@
 ## Backend
 
 ### Rest
-```JSON
+```js
 //matches 
 
 POST /api/match/create
-Body: {
-    "username": "string" //host username
+Header: {
+    session:leetcode_session,
 }
 
 Response: {
@@ -16,15 +16,22 @@ Response: {
 }
 
 
+/*
+this talks in reference to the user
+are they activily in this session
+*/
 GET /api/match/{code}/exists
 Response: {
     "exists": "boolean"
 }
+Header: {
+    session:leetcode_session,
+}
 
 
 POST /api/match/{code}/join
-Body: {
-    "username": "string"
+Headers: {
+    session:leetcode_session,
 }
 
 Response: {
@@ -56,12 +63,13 @@ Header: {
 }
 
 Response: {
-    "valid": "boolean",
+    "valid": boolean,
 }
 
 POST /api/action/raid
 Body: {
-    "target"
+    "target":string,
+    "line": number,
 }
 Header: {
     "auth":"token"
@@ -91,6 +99,38 @@ this will be used to sumbit and run problems
 We are to set the cookie for the CSRF-token and Session Token given from leetcode
 */ 
 
+// submissions
+POST /api/problem/run
+Body: {
+    problemid: number,
+    language: string,
+    code: string,
+    testcase: string
+}
+headers: {
+    csrf:crsf_token_val,
+    session:session_token_val,
+}
+
+Response:{
+    leetcodes_objection
+}
+
+POST /api/problem/submit
+Body: {
+    problemid: number,
+    language: string,
+    code: string,
+}
+headers: {
+    csrf:crsf_token_val,
+    session:session_token_val,
+}
+
+Response:{
+    leetcodes_objection
+}
+
 // errors
 
 Errors:
@@ -100,7 +140,7 @@ Response: {
 ```
 
 ### Websockets
-```json
+```js
 Sending Object: {
     "mode":"string", // given mode 
     "data": { //provding the accourding data object
@@ -120,6 +160,7 @@ Connect: {
 // server responses
 
 MatchState: {
+    "state": 
     //all match data which is unkown right now
 }
 

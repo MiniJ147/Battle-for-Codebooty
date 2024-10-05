@@ -4,14 +4,17 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "tsc && node dist/server.js"
+    "start": "tsc && node dist/src/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "express": "^4.21.0",
+    "jwt-decode": "^4.0.0",
     "ws": "^8.18.0"
   },
   "devDependencies": {
