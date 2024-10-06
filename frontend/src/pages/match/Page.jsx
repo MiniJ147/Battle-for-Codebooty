@@ -1,4 +1,5 @@
-import {Box, Button, HStack} from "@chakra-ui/react";
+import {Box, HStack} from "@chakra-ui/react";
+import { Responsive, WidthProvider } from "react-grid-layout";
 import {useState} from "react";
 import ProblemPanel from "./ProblemPanel.jsx";
 import SourceEditor from "./SourceEditor.jsx";
@@ -6,6 +7,9 @@ import IOEditor from "./IOEditor.jsx";
 import PythonEditor from "./PythonEditor.jsx";
 import CppEditor from "./CppEditor.jsx";
 import JavaEditor from "./JavaEditor.jsx";
+import ActionButtons from "./ActionButtons.jsx";
+
+const ResponsiveGridLayout = WidthProvider(Responsive);
 
 export const Match = () => {
   let problem = {};
@@ -22,7 +26,7 @@ export const Match = () => {
   // }, []);
 
   problem = {
-    "titeSlug": "alternating-groups-iii",
+    "titleSlug": "alternating-groups-iii",
     "rating": 2316,
     "topics": [
       "Array",
@@ -167,17 +171,52 @@ export const Match = () => {
   return (
     <>
       <h1>Match</h1>
-      <Box bg="#0f0a19" color="gray.400">
-        <HStack>
-          <Box minH="100vh" w='50%' ml={6} mr={3} py={6}>
-            <ProblemPanel />
+      <Box bg="#1e1e2e" color="gray.400" p={4}> {/*remove color later*/}
+        <ResponsiveGridLayout
+          className="layout"
+          breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+          rowHeight={30}
+          cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+        >
+          <Box key="a" border="2px solid #6c7086" borderRadius={4}
+               data-grid={{ x: 0, y: 0, w: 6, h: 18, isDraggable: false, isResizable: true }}
+               droppingItem={{ i: "a", w: 6, h: 18 }}
+          >
+            <ProblemPanel title={problem.titleSlug} content={problem.content} />
           </Box>
-          <Box minH="100vh" w='50%' ml={3} mr={6} py={6}>
-            {/*<SelectMenu current={language} options={languages} onSelect={onSelect} />*/}
-            <SourceEditor currentLanguage={language} currentEditor={editor} onEditorSwitch={onEditorSwitch} languages={languages} editors={editors} idx={currentLanguage}/>
+          <Box key="b" border="2px solid #6c7086" borderRadius={4}
+               data-grid={{ x: 6, y: 0, w: 6, h: 11, isDraggable: false, isResizable: true }}
+               droppingItem={{ i: "b", w: 6, h: 11 }}
+          >
+            <SourceEditor currentLanguage={language} currentEditor={editor} onEditorSwitch={onEditorSwitch}
+                          languages={languages} editors={editors} idx={currentLanguage}/>
+          </Box>
+          <Box key="c" border="1px solid #6c7086" borderRadius={4}
+               data-grid={{ x: 6, y: 1, w: 4.5, h: 7, isDraggable: false, isResizable: true }}
+               droppingItem={{ i: "c", w: 4.5, h: 7 }}
+          >
             <IOEditor />
           </Box>
-        </HStack>
+          <Box key="d" border="1px solid #6c7086" borderRadius={4}
+               data-grid={{ x: 12, y: 1, w: 1.5, h: 7, isDraggable: false, isResizable: true }}
+               droppingItem={{ i: "d", w: 1.5, h: 7 }}
+          >
+            <ActionButtons />
+          </Box>
+        </ResponsiveGridLayout>
+
+
+        {/*<HStack>*/}
+        {/*  <Box minH="100vh" w='50%' ml={6} mr={3} py={6}>*/}
+        {/*    <ProblemPanel title={problem.titleSlug} content={problem.content} />*/}
+        {/*  </Box>*/}
+        {/*  <Box minH="100vh" w='50%' ml={3} mr={6} py={6}>*/}
+        {/*    /!*<SelectMenu current={language} options={languages} onSelect={onSelect} />*!/*/}
+        {/*    <SourceEditor currentLanguage={language} currentEditor={editor} onEditorSwitch={onEditorSwitch}*/}
+        {/*                  languages={languages} editors={editors} idx={currentLanguage}/>*/}
+        {/*    <IOEditor />*/}
+        {/*  </Box>*/}
+        {/*</HStack>*/}
       </Box>
 
     </>

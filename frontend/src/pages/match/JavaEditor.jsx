@@ -23,7 +23,7 @@ function JavaEditor(prop) {
   return (
     <Box>
       <Editor
-        height="50vh"
+        height="42vh"
         theme="vs-dark"
         onMount={onMount}
         defaultLanguage="java"

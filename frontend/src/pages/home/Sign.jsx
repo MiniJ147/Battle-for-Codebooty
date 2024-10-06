@@ -46,8 +46,8 @@ const Sign = () => {
                     className="w-44 h-20 flex justify-center items-center font-Montserrat border-wood2 border-8 rounded-md shadow-md"
                     >
                     <div className="relative group">
-                        <button className="p-2 bg-wood2 rounded-md hover:bg-wood1" onClick={handleClick}>{isSignedIn ? <p>Logout</p> : <p>Sign in</p>}</button>
-                        <span className="absolute bottom-0 left-0 w-0 h-1 bg-wood4 transition-all group-hover:w-full rounded-lg"></span>
+                        <button className="p-2 bg-soft-blue-end rounded-md hover:bg-soft-blue-start duration-1000" onClick={handleClick}>{isSignedIn ? <p>Logout</p> : <p>Sign in</p>}</button>
+                       
                     </div>
                     
                 </div>

@@ -2,7 +2,7 @@ import { MatchManager } from "./matches/exporter.js";
 import problemDataJSON from "../data/leetcode_data.json" assert {type: "json"};
 import { WebSocketServer } from "ws";
 
-interface Problem{
+export interface JSONProblem{
     id : number
     title : string
     titleSlug: string;
@@ -19,11 +19,11 @@ interface Problem{
 }
 
 interface ProblemDataJSON {
-  cache: Problem[];
+  cache: JSONProblem[];
 }
 
 const matchManger = new MatchManager();
-const problemData: Problem[] = (problemDataJSON as ProblemDataJSON).cache;
+const problemData: JSONProblem[] = (problemDataJSON as ProblemDataJSON).cache;
 
 export default { 
     matchManger: matchManger,

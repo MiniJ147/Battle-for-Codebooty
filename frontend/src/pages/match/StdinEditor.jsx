@@ -25,7 +25,7 @@ function StdinEditor() {
   return (
     <Box>
       <Editor
-        height='28vh'
+        height='23.5vh'
         theme="vs-dark"
         onMount={onMount}
         value={value}

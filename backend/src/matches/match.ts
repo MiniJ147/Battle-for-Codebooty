@@ -1,5 +1,6 @@
 import { WebSocket } from "ws"
-import globals from '../global.js'
+import globals, { JSONProblem } from '../global.js'
+import { title } from "process"
 
 enum MatchState {
   Empty
@@ -7,113 +8,89 @@ enum MatchState {
 
 export class Match {
   public matchCode: string
-  public state: MatchState
+  public state: MatchState = MatchState.Empty
   public users: Map<string, User>
   public results: Results
   public hostUsername: string
 
- 
+  public inGracePeriod: boolean = true;
+
+  public problemStates: ProblemState[] = []
+
+  private queries: ProblemQuerier
+  private problemCnt: number = 1;
 
   constructor(matchCode: string, hostUsername) {
     this.matchCode = matchCode;
-    this.users = new Map<string, User>();
-    this.state = MatchState.Empty;
-
     this.hostUsername = hostUsername;
 
+    this.users = new Map<string, User>();
+    this.queries = new ProblemQuerier(900, 200, 100);
+
+    //removing lobby grace period after 1 minute 
+    setTimeout(() => {
+      console.log("grace period over");
+      this.inGracePeriod = false;
+    }, 60000);
     console.log("creating");
   }
 
   // problem things
+  public newProblem() {
+    this.problemCnt++;
 
-  public newProblem(): Problem {
-    
-    return undefined
+    // clearing the solve times
+    this.problemStates.forEach(v => {
+      v.solveTime = -1;
+    })
+
+    this.queries.newProblem()
   }
 
   public getProblem(): Problem {
-    return undefined;
+    return this.queries.getCurrentProblem();
   }
 
-
   //user things
-  
-  public getUser(username : string): User{
+
+  public getUser(username: string): User {
     return this.users[username];
   }
 
-  public addUser(user: User): User {
-    console.log("attempting to add user",this.users);
-    if(this.hasUser(user.username)){
-      return this.getUser(user.username);
+  // returns boolean if they are allowed to be added
+  // if they are not it will be returned false
+  public addUser(user: User): boolean {
+    console.log("attempting to add user", this.users);
+    const result = this.getUser(user.username);
+    if(result){
+      return !result.kicked;
     }
 
     this.users[user.username] = user;
-    return user;
+    this.problemStates.push({ username: user.username, solveTime: -1 });
+    return true;
+  }
+
+  public removeUser(username: string) {
+    this.users.delete(username);
+    this.problemStates = this.problemStates.filter(v => v.username != username);
+  }
+
+  public isEmpty(): boolean {
+    return this.users.size == 0
   }
 
   public hasUser(username: string): boolean {
-    return this.users[username]!=undefined;
+    return this.users[username] != undefined;
   }
 }
 
-class ProblemQuerier {
-  private currProblem: Problem
-  private currElo : number
-  private eloBuf : number
-  private eloInc: number
-
-  private perviousProblemIds : number[]
-
-  constructor(startElo : number, eloBuf : number, eloInc : number){
-    this.currElo = startElo
-    this.eloBuf = eloBuf;
-    this.eloInc = eloInc;
-
-    this.perviousProblemIds = [];
-  }
-
-
-  public newProblem(): Problem {
-    const newProblem = this.fetchProblem();
-    
-    // general edge case that I don't have time fixing
-    // it should never happen tho
-    if(!newProblem){
-      return this.currProblem;
-    }
-
-    // this.perviousProblemIds.push(this.currProblem.id)
-    
-    this.currElo+=this.eloInc;
-    this.currProblem = newProblem;
-    return newProblem;
-  }
-
-  public getCurrentProblem(): Problem{
-    return this.currProblem;
-  }
-
-  private fetchProblem(): Problem{
-    globals.problemData.forEach((val,idx)=>{
-      const rating = val.rating;
-      
-      const inRange = rating-this.eloBuf<=this.currElo && rating+this.eloBuf>=this.currElo;
-      const notUsed = true //!this.perviousProblemIds.includes(val.id);
-
-      if(inRange && notUsed){
-        return val;
-      }
-    })
-  
-    return undefined;
-  }
-}
-
+// users
 export class User {
   public username: string
   public ws: WebSocket
   public kicked: boolean
+
   private host: boolean
 
   constructor(ws: WebSocket, username: string, isHost: boolean) {
@@ -128,10 +105,102 @@ export class User {
   }
 }
 
+
+
+// problem querier
+
+class ProblemQuerier {
+  private currProblem: Problem
+  private currElo: number
+  private eloBuf: number
+  private eloInc: number
+
+  private perviousProblemIds: number[]
+
+  constructor(startElo: number, eloBuf: number, eloInc: number) {
+    this.currElo = startElo
+    this.eloBuf = eloBuf;
+    this.eloInc = eloInc;
+
+    this.perviousProblemIds = [];
+    this.newProblem();
+  }
+
+
+  public newProblem() {
+    console.log("fetching new problem,", this.currElo);
+    const JSONProblem = this.fetchJSONProblem()
+    // general edge case that I don't have time fixing
+    // it should never happen tho
+    if (!JSONProblem) {
+      return;
+    }
+    const formated = this.formatJSONProblem(JSONProblem)
+    if (!this.currProblem) {
+      this.currProblem = formated;
+      return;
+    }
+
+    this.perviousProblemIds.push(this.currProblem.id)
+
+    this.currElo += this.eloInc;
+    this.currProblem = formated;
+  }
+
+  public getCurrentProblem(): Problem {
+    return this.currProblem;
+  }
+
+  private formatJSONProblem(problem: JSONProblem): Problem {
+    let res: Problem = {
+      id: problem.id,
+      title: problem.title,
+      titleSlug: problem.titleSlug,
+      content: problem.content,
+      sampleCases: problem.exampleTestcases.join("\n"),
+      templates: new Map<string, string>()
+    }
+
+    // translating objects to map
+    problem.codeSnippets.forEach((value) => {
+      res.templates[value.langSlug] = value.code;
+    })
+
+    return res;
+  }
+
+  private fetchJSONProblem(): JSONProblem {
+    for (let i = 0; i < globals.problemData.length; i++) {
+      const val = globals.problemData[i];
+
+      const rating = val.rating;
+      const buf = this.eloBuf
+
+      const inRange = rating - buf <= this.currElo && this.currElo <= rating + buf
+      const notUsed = !this.perviousProblemIds.includes(val.id);
+
+      console.log(val.title, inRange, notUsed);
+      if (inRange && notUsed) {
+        console.log("returning ", val)
+        return val;
+      }
+    }
+
+    console.log("couild not find a problem");
+    return undefined;
+  }
+}
+
+type ProblemState = {
+  username: string
+  solveTime: number
+}
+
 export type Problem = {
   id: number,
+  title: string
   titleSlug: string,
-  description: string,
+  content: string,
   templates: Map<string, string>,
   sampleCases: string
 }

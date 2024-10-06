@@ -4,13 +4,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        'soft-blue-start': '#9BC5DA',
-        'soft-blue-middle': '#AACDDD',
-        'soft-blue-end': '#BAD5E1', 
-        'wave-blue': '#8CBDD6',
+        'soft-blue-start': '#181825',
+        'soft-blue-middle': '#1e1e2e',
+        'soft-blue-end': '#313244', 
+        'crust': '#11111b',
+        'wave-blue': '#464862',
         'water-blue-start': '#8bbcd5',
         'water-blue-middle': '#74a8cf',
         'water-blue-end': '#6592c8',
+        'overlay-0': '#585b70',
 
         'wood1': '#4E403E',
         'wood2': '#564540',

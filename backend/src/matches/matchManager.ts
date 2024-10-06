@@ -9,13 +9,7 @@ export class MatchManager {
 
   // throws error if match does not exists
   public getMatch(matchCode : string) : Match {
-    console.log(this.matches);
-    const result = this.matches[matchCode];
-    if (!result){
-      throw "match does not exists"
-    }
-    
-    return result;
+    return this.matches[matchCode]
   }
 
   // returns success state
