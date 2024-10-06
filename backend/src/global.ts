@@ -3,7 +3,9 @@ import problemDataJSON from "../data/leetcode_data.json" assert {type: "json"};
 import { WebSocketServer } from "ws";
 
 interface Problem{
-    titeSlug: string;
+    id : number
+    title : string
+    titleSlug: string;
     rating: number;
     topics: string[];
     created: number;
