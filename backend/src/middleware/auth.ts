@@ -2,14 +2,20 @@ import { jwtDecode } from "jwt-decode";
 
 export default function VerifyAuth(req, res, next) {
     try {
-        if (req.cookies.LEETCODE_SESSION && req.cookies.CSRF_TOKEN) {
-            const decoded = jwtDecode(req.cookies.LEETCODE_SESSION) as any;
+        const SESSION = req.headers["leetcode-session"];
+        const CSRF_TOKEN = req.headers["csrf-token"];
+
+       
+        console.log(req.headers,SESSION,CSRF_TOKEN);
+        if (SESSION && CSRF_TOKEN) {
+            const decoded = jwtDecode(SESSION) as any;
             decoded.username;
             next();
             return;
         }
         throw "invalid cookie";
     } catch (e) {
+        console.log("failed auth")
         res.clearCookie("LEETCODE_SESSION");
         res.clearCookie("CSRF_TOKEN");
 

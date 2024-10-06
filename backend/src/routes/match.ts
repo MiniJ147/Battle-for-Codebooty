@@ -6,7 +6,7 @@ import { User } from "../matches/match.js";
 
 router.post("/create",(req,res)=>{
     try{
-        const sessionToken = req.cookies.LEETCODE_SESSION;
+        const sessionToken = req.headers["leetcode-session"] as string;
         if(!sessionToken){
             res.status(401).send({status:"invalid token"});
             return;
@@ -25,7 +25,7 @@ router.post("/create",(req,res)=>{
 
 router.post("/:matchCode/join",(req,res)=>{
     try{
-        const data = jwtDecode(req.cookies.LEETCODE_SESSION) as any;
+        const data = jwtDecode(req.headers["leetcode-session"] as string) as any;
         const match = globals.matchManger.getMatch(req.params.matchCode);
 
         const joined =  match.addUser(new User(undefined,data.username,false));
