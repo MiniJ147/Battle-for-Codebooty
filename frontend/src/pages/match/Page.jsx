@@ -1,11 +1,11 @@
 import {Box, Button, HStack} from "@chakra-ui/react";
 import {useState} from "react";
-import ProblemPanel from "../../components/ProblemPanel.jsx";
-import SourceEditor from "../../components/SourceEditor.jsx";
-import IOEditor from "../../components/IOEditor.jsx";
-import PythonEditor from "../../components/PythonEditor.jsx";
-import CppEditor from "../../components/CppEditor.jsx";
-import JavaEditor from "../../components/JavaEditor.jsx";
+import ProblemPanel from "./ProblemPanel.jsx";
+import SourceEditor from "./SourceEditor.jsx";
+import IOEditor from "./IOEditor.jsx";
+import PythonEditor from "./PythonEditor.jsx";
+import CppEditor from "./CppEditor.jsx";
+import JavaEditor from "./JavaEditor.jsx";
 
 export const Match = () => {
   let problem = {};
@@ -174,7 +174,7 @@ export const Match = () => {
           </Box>
           <Box minH="100vh" w='50%' ml={3} mr={6} py={6}>
             {/*<SelectMenu current={language} options={languages} onSelect={onSelect} />*/}
-            <SourceEditor currentLanguage={language} currentEditor={editor} onEditorSwitch={onEditorSwitch} languages={languages} editors={editors}/>
+            <SourceEditor currentLanguage={language} currentEditor={editor} onEditorSwitch={onEditorSwitch} languages={languages} editors={editors} idx={currentLanguage}/>
             <IOEditor />
           </Box>
         </HStack>

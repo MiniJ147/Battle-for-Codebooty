@@ -21,7 +21,6 @@ export class Match {
 
     this.hostUsername = hostUsername;
 
-    console.log(globals.problemData);
     console.log("creating");
   }
 
@@ -59,7 +58,7 @@ export class Match {
 }
 
 class ProblemQuerier {
-  private problem: Problem
+  private currProblem: Problem
   private currElo : number
   private eloBuf : number
   private eloInc: number
@@ -76,14 +75,37 @@ class ProblemQuerier {
 
 
   public newProblem(): Problem {
-    return undefined;
+    const newProblem = this.fetchProblem();
+    
+    // general edge case that I don't have time fixing
+    // it should never happen tho
+    if(!newProblem){
+      return this.currProblem;
+    }
+
+    // this.perviousProblemIds.push(this.currProblem.id)
+    
+    this.currElo+=this.eloInc;
+    this.currProblem = newProblem;
+    return newProblem;
   }
 
   public getCurrentProblem(): Problem{
-    return this.problem;
+    return this.currProblem;
   }
 
   private fetchProblem(): Problem{
+    globals.problemData.forEach((val,idx)=>{
+      const rating = val.rating;
+      
+      const inRange = rating-this.eloBuf<=this.currElo && rating+this.eloBuf>=this.currElo;
+      const notUsed = true //!this.perviousProblemIds.includes(val.id);
+
+      if(inRange && notUsed){
+        return val;
+      }
+    })
+  
     return undefined;
   }
 }

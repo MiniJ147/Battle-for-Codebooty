@@ -1,7 +1,7 @@
 import {
   Box,
   Button, Divider,
-  HStack, StackDivider,
+  HStack,
   Tab,
   TabIndicator,
   TabList,
@@ -36,14 +36,16 @@ function IOEditor() {
         </Box>
 
 
-        <Box w='20%' h='36vh' border="1px solid" borderRadius={4} borderColor="#333" alignItems="center" px={4} py={4}>
-          <VStack alignItems="center">
-            <Button variant="outline" w='full' fontSize={12} boxSize={"full"} py={2}>Cannon Blast</Button>
-            <Button variant="outline" w='full' fontSize={12} boxSize={"full"} py={2}>Spyglass</Button>
-            <Button variant="outline" w='full' fontSize={12} boxSize={"full"} py={2}>Raid Ship</Button>
-            <Divider bgColor={"#fff"} />
-            <Button variant="outline" colorScheme="green" w='full' fontSize={12} boxSize={"full"} py={2}>Run</Button>
-            <Button variant="solid" colorScheme="green" w='full' fontSize={12} boxSize={"full"} py={2}>Submit</Button>
+        <Box w='20%' h='36vh' border="1px solid" borderRadius={4} borderColor="#333" px={4} py={2}>
+          <VStack justifyContent="center" spacing={1} w="full" h="full">
+            <b>Actions</b>
+            <Divider bgColor={"#fff"} mb={1} mt={1} borderWidth={1.5} borderRadius={8} />
+            <Button variant="outline" w='full' fontSize={12} py={2}>Cannon Blast</Button>
+            <Button variant="outline" w='full' fontSize={12} py={2}>Spyglass</Button>
+            <Button variant="outline" w='full' fontSize={12} py={2}>Raid Ship</Button>
+            <Divider bgColor={"#fff"} mb={1} mt={1} borderWidth={1.5} borderRadius={8} />
+            <Button variant="outline" colorScheme="green" w='full' fontSize={12} py={2}>Run</Button>
+            <Button variant="solid" colorScheme="green" w='full' fontSize={12} py={2}>Submit</Button>
           </VStack>
         </Box>
       </HStack>
