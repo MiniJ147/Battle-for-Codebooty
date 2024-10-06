@@ -9,7 +9,7 @@ const ActionCard = (props) => {
                     style={{backgroundImage: `url(${props.img})` }}
                 ></div>
                 
-                <div className="text-3xl text-left font-PirataOne">{props.title}</div>
+                <div className="text-5xl text-left font-PirataOne pt-3">{props.title}</div>
                 <p className="h-28 text-lg">{props.desc}</p>
         
             </div>

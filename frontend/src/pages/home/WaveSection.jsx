@@ -2,13 +2,13 @@ import React from 'react';
 import Wave from 'react-wavify';
 
 
-const WaveSection = () => {
+const WaveSection = (props) => {
     return (
         <div className='relative'>
             <div className="" style={{ backgroundColor: '#313244'}}>
                 <Wave 
                     className=''
-                    fill = '#181825'
+                    fill = {props.color}
                     paused={false}
                     options={{
                         height: 20,
