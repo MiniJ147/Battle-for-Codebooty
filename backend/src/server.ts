@@ -11,13 +11,11 @@ app.use(cors(),cookieParser());
 
 const server = http.createServer(app);
 globals.wss = new WebSocketServer({server});
-
-globals.wss.on("connection",(ws)=>{
-  
-  ws.on("message",(data)=>{
-    console.log(data.toString());
-  })
-})
+globals.wss.on("connection",(ws,req)=>{
+  handleWebSocket(ws,req,{
+    matchManager: globals.matchManger
+  });
+});
 
 // type Event = {
 //   status: string
@@ -46,6 +44,7 @@ import problemRouter from './routes/problem.js';
 app.use("/api/problem",VerifyAuth,problemRouter);
 
 import verifyRouter from './routes/verify.js';
+import handleWebSocket from './routes/websocket.js';
 app.use("/api/verify",verifyRouter);
 
 

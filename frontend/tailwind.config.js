@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}",],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -8,19 +8,23 @@ export default {
         'soft-blue-middle': '#AACDDD',
         'soft-blue-end': '#BAD5E1', 
         'wave-blue': '#8CBDD6',
+        'water-blue-start': '#8bbcd5',
+        'water-blue-middle': '#74a8cf',
+        'water-blue-end': '#6592c8',
+
         'wood1': '#4E403E',
         'wood2': '#564540',
         'wood3': '#5F4B43',
         'wood4': '#675045',
-        'wood1': '#4E403E',
       },
       fontFamily: {
         PirataOne: ["Pirata One", "sans-serif"],
         Montserrat: ["Montserrat", "sans-serif"],
-      }
-      
+      },
+      rotate: {
+        '360': '360deg',
+      },
     },
   },
   plugins: [],
 }
-

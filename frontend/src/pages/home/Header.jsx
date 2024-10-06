@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 
 import WoodBg from '../../assets/woodpattern.png'
+import Wheel from'../../assets/wheel.png'
 
 
 function Header(){
@@ -34,25 +35,32 @@ function Header(){
     return(
         <>
         
-        <div className='w-full flex justify-center align-baseline p-20 '>
-            <div style={{backgroundImage: `url(${WoodBg})`}} className='relative bg-wood3 w-2/3 flex-col justify-center items-center p-10 rounded-md border-wood2 border-8 drop-shadow-2xl'>
-            
+        <div className='w-full flex justify-center align-baseline p-44 pb-20'>
+            <div className='relative justify-center align-baseline flex w-full '>
 
-            <div className="absolute top-0 left-0 p-2">
-                <div className="w-6 h-6 bg-gray-500 rounded-full border-gray-600 border-4 shadow-2xl"></div> {/* Top-Left */}
-            </div>
-            <div className="absolute top-0 right-0 p-2">
-                <div className="w-6 h-6 bg-gray-500 rounded-full border-gray-600 border-4 shadow-2xl"></div> {/* Top-Right */}
-            </div>
-            <div className="absolute bottom-0 left-0 p-2">
-                <div className="w-6 h-6 bg-gray-500 rounded-full border-gray-600 border-4 shadow-2xl"></div> {/* Bottom-Left */}
-            </div>
-            <div className="absolute bottom-0 right-0 p-2">
-                <div className="w-6 h-6 bg-gray-500 rounded-full border-gray-600 border-4 shadow-2xl"></div> {/* Bottom-Right */}
-            </div>
+           
+            <img src={Wheel}  style={{ top:'-133px' }} className='w-64 h-64 absolute  transition-transform duration-1000 ease-in-out transform hover:rotate-360'/>
+
+            <div style={{backgroundImage: `url(${WoodBg})`}} className='relative bg-wood3 w-2/3 flex-col justify-center items-center p-10 rounded-md border-wood2 border-8 drop-shadow-2xl flex '>
+                 
+
+                <div className="absolute top-0 left-0 p-2">
+                    <div className="w-6 h-6 bg-gray-500 rounded-full border-gray-600 border-4 shadow-2xl"></div> {/* Top-Left */}
+                </div>
 
 
-                <div className="text-center text-8xl font-PirataOne">Battle For Codebooty</div>
+                    <div className="absolute top-0 right-0 p-2">
+                        <div className="w-6 h-6 bg-gray-500 rounded-full border-gray-600 border-4 shadow-2xl"></div> {/* Top-Right */}
+                    </div>
+                    <div className="absolute bottom-0 left-0 p-2">
+                        <div className="w-6 h-6 bg-gray-500 rounded-full border-gray-600 border-4 shadow-2xl"></div> {/* Bottom-Left */}
+                    </div>
+                    <div className="absolute bottom-0 right-0 p-2">
+                        <div className="w-6 h-6 bg-gray-500 rounded-full border-gray-600 border-4 shadow-2xl"></div> {/* Bottom-Right */}
+                    </div>
+                
+                    <div className="text-center text-8xl font-PirataOne">Battle For Codebooty</div>
+
                     <div className='font-Montserrat'>
                         <form onSubmit={handleSubmit} className="flex items-center justify-center space-x-1 p-4">
                             <input  type="text" 
@@ -61,22 +69,23 @@ function Header(){
                                     className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-10 focus:wood1 bg-gray-300 text-black"
                                     placeholder="Enter Lobby Code"
                             />
-                            <button type="submit" 
-                                    className="bg-wood2 text-white px-4 py-2 rounded hover:bg-wood1 focus:outline-none focus:ring-2 focus:ring-wood4 dropshadow-2xl duration-300"
-                            >
-                                Join   
-                            </button>
-                            
+                            <div className="relative group">
+                                <button type="submit" className="bg-wood2 text-white px-4 py-2 rounded hover:bg-wood1  dropshadow-2xl duration-300">Join</button>
+                                <span className="absolute bottom-0 left-0 w-0 h-1 bg-wood4 transition-all group-hover:w-full rounded-lg"></span>
+                            </div>
+                        
                         </form>
                         <form onSubmit={handleCreateLobby} className="flex items-center justify-center space-x-2">
-                            <button type="submit" 
-                                        className="bg-wood2 text-white px-4 py-2 rounded hover:bg-wood1 focus:outline-none focus:ring-2 focus:ring-wood4 dropshadow-2xl duration-300"
-                                >
-                                    Create Lobby
-                            </button>
+                            <div className="relative group">
+                                <button type="submit" className="bg-wood2 text-white px-4 py-2 rounded hover:bg-wood1 focus:outline-none focus:ring-2 focus:ring-wood4 dropshadow-2xl duration-300">Create Lobby</button>
+                                <span className="absolute bottom-0 left-0 w-0 h-1 bg-wood4 transition-all group-hover:w-full rounded-lg"></span>
+                            </div>
+                            
                         </form>
                     </div>
+                    </div>
             </div>
+            
         </div>
             
             
