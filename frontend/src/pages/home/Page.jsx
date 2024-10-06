@@ -19,15 +19,16 @@ export const Home = () => {
       </div>
 
       <Wave/>
+      
 
       <div className='relative w-full'>
-        <div className='absolute w-full h-10 bg-wave-blue bottom-0'></div>
+        <div className='absolute w-full h-10 bg-soft-blue-start bottom-0'></div>
       </div>
-      <div className='min-h-screen bg-wave-blue'>
+      <div className='min-h-screen bg-soft-blue-start'>
           <h1 className='text-center py-10 text-4xl'>How to Play</h1>
 
-          <div className='min-w-4 text-center'>
-            <p>This is our game! this is how it works! we have alot of cool features! there are 3 power ups! Raid! Cannon! Spyglass!</p>
+          <div className='w-full text-center pb-12 text-xl flex justify-center'>
+            <p className='max-w-6xl'>This is our game! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat blanditiis ab dicta distinctio praesentium, sed non nam sequi. Soluta optio harum consectetur et unde a expedita, minima adipisci veniam doloremque!</p>
           </div>
 
           <div className='flex gap-8 text-center justify-center'>
@@ -40,6 +41,10 @@ export const Home = () => {
               <h>join</h>
               <p>this is how you join a lobby</p>
             </div>
+          </div>
+
+          <div>
+            <h1 className='text-center pt-10 text-3xl'>Actions</h1>
           </div>
 
           <div className='flex row gap-8 justify-center'>

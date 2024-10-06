@@ -47,38 +47,36 @@ function Header(){
                 <div className="absolute top-0 left-0 p-2">
                     <div className="w-6 h-6 bg-gray-500 rounded-full border-gray-600 border-4 shadow-2xl"></div> {/* Top-Left */}
                 </div>
-
-
-                    <div className="absolute top-0 right-0 p-2">
-                        <div className="w-6 h-6 bg-gray-500 rounded-full border-gray-600 border-4 shadow-2xl"></div> {/* Top-Right */}
-                    </div>
-                    <div className="absolute bottom-0 left-0 p-2">
-                        <div className="w-6 h-6 bg-gray-500 rounded-full border-gray-600 border-4 shadow-2xl"></div> {/* Bottom-Left */}
-                    </div>
-                    <div className="absolute bottom-0 right-0 p-2">
-                        <div className="w-6 h-6 bg-gray-500 rounded-full border-gray-600 border-4 shadow-2xl"></div> {/* Bottom-Right */}
-                    </div>
-                
-                    <div className="text-center text-8xl font-PirataOne">Battle For Codebooty</div>
+                <div className="absolute top-0 right-0 p-2">
+                    <div className="w-6 h-6 bg-gray-500 rounded-full border-gray-600 border-4 shadow-2xl"></div> {/* Top-Right */}
+                </div>
+                <div className="absolute bottom-0 left-0 p-2">
+                    <div className="w-6 h-6 bg-gray-500 rounded-full border-gray-600 border-4 shadow-2xl"></div> {/* Bottom-Left */}
+                </div>
+                <div className="absolute bottom-0 right-0 p-2">
+                    <div className="w-6 h-6 bg-gray-500 rounded-full border-gray-600 border-4 shadow-2xl"></div> {/* Bottom-Right */}
+                </div>
+            
+                    <div className="text-center text-8xl font-PirataOne text-crust">Battle For Codebooty</div>
 
                     <div className='font-Montserrat'>
                         <form onSubmit={handleSubmit} className="flex items-center justify-center space-x-1 p-4">
                             <input  type="text" 
                                     value={inputValue} 
                                     onChange={(e) => setInputValue(e.target.value)}
-                                    className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-10 focus:wood1 bg-gray-300 text-black"
+                                    className=" rounded px-3 py-2 focus:outline-none focus:ring-10 focus:wood1 bg-overlay-0 text-white"
                                     placeholder="Enter Lobby Code"
                             />
                             <div className="relative group">
-                                <button type="submit" className="bg-wood2 text-white px-4 py-2 rounded hover:bg-wood1  dropshadow-2xl duration-300">Join</button>
-                                <span className="absolute bottom-0 left-0 w-0 h-1 bg-wood4 transition-all group-hover:w-full rounded-lg"></span>
+                                <button type="submit" className="bg-soft-blue-end text-white px-4 py-2 rounded hover:bg-soft-blue-middle  dropshadow-2xl duration-1000">Join</button>
+                            
                             </div>
                         
                         </form>
                         <form onSubmit={handleCreateLobby} className="flex items-center justify-center space-x-2">
                             <div className="relative group">
-                                <button type="submit" className="bg-wood2 text-white px-4 py-2 rounded hover:bg-wood1 focus:outline-none focus:ring-2 focus:ring-wood4 dropshadow-2xl duration-300">Create Lobby</button>
-                                <span className="absolute bottom-0 left-0 w-0 h-1 bg-wood4 transition-all group-hover:w-full rounded-lg"></span>
+                                <button type="submit" className="bg-soft-blue-end text-white px-4 py-2 rounded hover:bg-soft-blue-middle focus:outline-none focus:ring-2 focus:ring-wood4 dropshadow-2xl duration-1000">Create Lobby</button>
+                                
                             </div>
                             
                         </form>

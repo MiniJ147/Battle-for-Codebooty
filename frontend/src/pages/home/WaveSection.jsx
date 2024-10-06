@@ -5,10 +5,10 @@ import Wave from 'react-wavify';
 const WaveSection = () => {
     return (
         <div className='relative'>
-            <div className="" style={{ backgroundColor: '#BAD5E1'}}>
+            <div className="" style={{ backgroundColor: '#313244'}}>
                 <Wave 
                     className=''
-                    fill = '#8CBDD6'
+                    fill = '#181825'
                     paused={false}
                     options={{
                         height: 20,
