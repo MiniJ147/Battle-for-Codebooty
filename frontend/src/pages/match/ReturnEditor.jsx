@@ -26,7 +26,7 @@ function ReturnEditor() {
   return (
     <Box>
       <Editor
-        height='100%'
+        height='28vh'
         theme="vs-dark"
         onMount={onMount}
         value={value}
