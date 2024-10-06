@@ -28,9 +28,9 @@ router.post("/:matchCode/join",(req,res)=>{
         const data = jwtDecode(req.cookies.LEETCODE_SESSION) as any;
         const match = globals.matchManger.getMatch(req.params.matchCode);
 
-        const userData = match.addUser(new User(undefined,data.username,false));
-        if (userData.kicked){
-            res.status(401).send({status:"you have been kicked"})
+        const joined =  match.addUser(new User(undefined,data.username,false));
+        if (!joined){
+            res.status(401).send({status:"you have been kicked or some error occured to be unable to join"})
             return;
         }
 

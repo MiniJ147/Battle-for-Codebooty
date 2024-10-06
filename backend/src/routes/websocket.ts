@@ -36,6 +36,10 @@ function connectToMatch(ws : WebSocket, sessionToken : string, matchCode : strin
     try{
         const data = jwtDecode(sessionToken) as any;
         const match = matchManager.getMatch(matchCode);
+        if(!match){
+          throw "match does not exists";
+        }
+        console.log(match);
 
         const userData = match.addUser(new User(ws,data.username,false));
     }catch(e){
