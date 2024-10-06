@@ -174,7 +174,7 @@ export const Match = () => {
           </Box>
           <Box minH="100vh" w='50%' ml={3} mr={6} py={6}>
             {/*<SelectMenu current={language} options={languages} onSelect={onSelect} />*/}
-            <SourceEditor currentLanguage={language} currentEditor={editor} onEditorSwitch={onEditorSwitch} languages={languages} editors={editors}/>
+            <SourceEditor currentLanguage={language} currentEditor={editor} onEditorSwitch={onEditorSwitch} languages={languages} editors={editors} idx={currentLanguage}/>
             <IOEditor />
           </Box>
         </HStack>
