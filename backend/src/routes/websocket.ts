@@ -14,22 +14,32 @@ function getTokens(req: http.IncomingMessage): {
   session: string;
   csrf: string;
 } {
-  let cookies = new Map<string,string>();
-  try {
-    const parsed = req.headers.cookie.split(";");
+  // let cookies = new Map<string,string>();
+  // try {
+  //   const parsed = req.headers.cookie.split(";");
 
-    parsed.forEach((value) => {
-      const valueParsed = value.split("=");
-      cookies[valueParsed[0].trim()] = valueParsed[1].trim();
-    });
+  //   parsed.forEach((value) => {
+  //     const valueParsed = value.split("=");
+  //     cookies[valueParsed[0].trim()] = valueParsed[1].trim();
+  //   });
 
-    // validates cookie
-    jwtDecode(cookies["LEETCODE_SESSION"]);
-  } catch (e) {
-    return {session:undefined,csrf:undefined}
+  //   // validates cookie
+  //   jwtDecode(cookies["LEETCODE_SESSION"]);
+  // } catch (e) {
+  //   return {session:undefined,csrf:undefined}
+  // }
+  
+  let val = {session:undefined, csrf: req.headers["csrf-token"] as string};
+  try{
+    const decoded = jwtDecode(req.headers["leetcode-session"] as string) as any;
+    if(decoded.username){
+      val.session = req.headers["leetcode-session"];
+    }
+  }catch(e){
+    console.log(e);
   }
 
-  return { session: cookies["LEETCODE_SESSION"], csrf: cookies["CSRF_TOKEN"]};
+  return val
 }
 
 function connectToMatch(ws : WebSocket, sessionToken : string, matchCode : string, matchManager : MatchManager) : boolean {
