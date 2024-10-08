@@ -1,10 +1,9 @@
 import { Editor } from "@monaco-editor/react";
 import { Box } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
-function StdinEditor() {
+function StdinEditor(prop) {
   const editorRef = useRef()
-  const [value, setValue] = useState('')
 
   const onMount = (editor) => {
     editorRef.current = editor;
@@ -28,9 +27,9 @@ function StdinEditor() {
         height='23.5vh'
         theme="vs-dark"
         onMount={onMount}
-        value={value}
+        value={prop.snippet}
         options={options}
-        onChange={(value) => setValue(value)}
+        onChange={prop.onChange}
       />
     </Box>
   )

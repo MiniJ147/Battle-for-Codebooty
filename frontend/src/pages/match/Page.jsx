@@ -8,6 +8,9 @@ import PythonEditor from "./PythonEditor.jsx";
 import CppEditor from "./CppEditor.jsx";
 import JavaEditor from "./JavaEditor.jsx";
 import ActionButtons from "./ActionButtons.jsx";
+import StdinEditor from "./StdinEditor.jsx";
+import StdoutEditor from "./StdoutEditor.jsx";
+import ReturnEditor from "./ReturnEditor.jsx";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -146,26 +149,35 @@ export const Match = () => {
   const snippets = [
     problem["codeSnippets"].find(snippet => snippet.langSlug === languages[0][0]).code,
     problem["codeSnippets"].find(snippet => snippet.langSlug === languages[1][0]).code,
-    problem["codeSnippets"].find(snippet => snippet.langSlug === languages[2][0]).code
+    problem["codeSnippets"].find(snippet => snippet.langSlug === languages[2][0]).code,
+    problem["exampleTestcases"].join("\n")
   ]
   const impls = [
     useState(snippets[0]),
     useState(snippets[1]),
-    useState(snippets[2])
+    useState(snippets[2]),
+    useState(snippets[3]),
+    useState(""),
+    useState("")
   ]
-  const editors = [
+  const sourceEditors = [
     <PythonEditor key="python3" snippet={impls[0][0]} onChange={(value) => {impls[0][1](value)}} />,
     <CppEditor key="cpp" snippet={impls[1][0]} onChange={(value) => {impls[1][1](value)}} />,
     <JavaEditor key="java" snippet={impls[2][0]} onChange={(value) => {impls[2][1](value)}} />
   ];
+  const ioEditors = [
+    <StdinEditor key="stdin" snippet={impls[3][0]} onChange={(value) => {impls[3][1](value)}} />,
+    <StdoutEditor key="stdout" snippet={impls[4][0]} onChange={(value) => {impls[4][1](value)}} />,
+    <ReturnEditor key="return" snippet={impls[5][0]} onChange={(value) => {impls[5][1](value)}} />
+  ];
 
   const [language, setLanguage] = useState(languages[0])
-  const [editor, setEditor] = useState(editors[0])
+  const [editor, setEditor] = useState(sourceEditors[0])
 
   const onEditorSwitch = (idx) => {
     currentLanguage = idx
     setLanguage(languages[idx])
-    setEditor(editors[idx])
+    setEditor(sourceEditors[idx])
   }
 
   return (
@@ -180,45 +192,31 @@ export const Match = () => {
         >
           <Box key="a" border="2px solid #6c7086" borderRadius={4}
                data-grid={{ x: 0, y: 0, w: 6, h: 18, isDraggable: false, isResizable: true }}
-               droppingItem={{ i: "a", w: 6, h: 18 }}
+               droppingitem={{ i: "a", w: 6, h: 18 }}
           >
             <ProblemPanel title={problem.titleSlug} content={problem.content} />
           </Box>
           <Box key="b" border="2px solid #6c7086" borderRadius={4}
                data-grid={{ x: 6, y: 0, w: 6, h: 11, isDraggable: false, isResizable: true }}
-               droppingItem={{ i: "b", w: 6, h: 11 }}
+               droppingitem={{ i: "b", w: 6, h: 11 }}
           >
             <SourceEditor currentLanguage={language} currentEditor={editor} onEditorSwitch={onEditorSwitch}
-                          languages={languages} editors={editors} idx={currentLanguage}/>
+                          languages={languages} editors={sourceEditors} idx={currentLanguage}/>
           </Box>
           <Box key="c" border="1px solid #6c7086" borderRadius={4}
                data-grid={{ x: 6, y: 1, w: 4.5, h: 7, isDraggable: false, isResizable: true }}
-               droppingItem={{ i: "c", w: 4.5, h: 7 }}
+               droppingitem={{ i: "c", w: 4.5, h: 7 }}
           >
-            <IOEditor />
+            <IOEditor editors={ioEditors} />
           </Box>
           <Box key="d" border="1px solid #6c7086" borderRadius={4}
                data-grid={{ x: 12, y: 1, w: 1.5, h: 7, isDraggable: false, isResizable: true }}
-               droppingItem={{ i: "d", w: 1.5, h: 7 }}
+               droppingitem={{ i: "d", w: 1.5, h: 7 }}
           >
             <ActionButtons />
           </Box>
         </ResponsiveGridLayout>
-
-
-        {/*<HStack>*/}
-        {/*  <Box minH="100vh" w='50%' ml={6} mr={3} py={6}>*/}
-        {/*    <ProblemPanel title={problem.titleSlug} content={problem.content} />*/}
-        {/*  </Box>*/}
-        {/*  <Box minH="100vh" w='50%' ml={3} mr={6} py={6}>*/}
-        {/*    /!*<SelectMenu current={language} options={languages} onSelect={onSelect} />*!/*/}
-        {/*    <SourceEditor currentLanguage={language} currentEditor={editor} onEditorSwitch={onEditorSwitch}*/}
-        {/*                  languages={languages} editors={editors} idx={currentLanguage}/>*/}
-        {/*    <IOEditor />*/}
-        {/*  </Box>*/}
-        {/*</HStack>*/}
       </Box>
-
     </>
   )
 }

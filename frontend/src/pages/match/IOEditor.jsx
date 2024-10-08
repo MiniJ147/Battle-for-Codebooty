@@ -9,13 +9,9 @@ import {
   TabPanels,
   Tabs,
   Text,
-  VStack
 } from "@chakra-ui/react";
-import StdinEditor from "./StdinEditor.jsx";
-import StdoutEditor from "./StdoutEditor.jsx";
-import ReturnEditor from "./ReturnEditor.jsx";
 
-function IOEditor() {
+function IOEditor(prop) {
   return (
     <>
       <Tabs isFitted position='relative' variant='enclosed'>
@@ -26,9 +22,9 @@ function IOEditor() {
         </TabList>
         <TabIndicator mt='-1.5px' height='1px' bg='blue.500' borderRadius='1px' />
         <TabPanels>
-          <TabPanel><StdinEditor /></TabPanel>
-          <TabPanel><StdoutEditor /></TabPanel>
-          <TabPanel><ReturnEditor /></TabPanel>
+          <TabPanel>{prop.editors[0]}</TabPanel>
+          <TabPanel>{prop.editors[1]}</TabPanel>
+          <TabPanel>{prop.editors[2]}</TabPanel>
         </TabPanels>
       </Tabs>
     </>
