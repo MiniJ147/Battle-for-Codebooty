@@ -8,6 +8,10 @@ function PythonEditor(prop) {
   const onMount = (editor) => {
     editorRef.current = editor;
     editor.focus();
+
+    // TODO:
+    // can use editor.setValue("") to change the value of an editor
+    // so just store an array of editor references in page.jsx later
   }
 
   const options = {
